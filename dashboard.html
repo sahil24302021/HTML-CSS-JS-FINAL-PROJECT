@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Dashboard - InternPath</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-solid" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span class="logo-icon">IP</span>
+                <span class="logo-text">InternPath</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="jobs.html" class="nav-link">Internships</a></li>
+                <li><a href="filters.html" class="nav-link">Explore</a></li>
+                <li><a href="company.html" class="nav-link">Companies</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="notification-bell" id="notifBell">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                    </svg>
+                    <span class="notif-badge" id="notifBadge"></span>
+                </button>
+                <a href="login.html" class="btn btn-outline-nav" id="navSignIn">Sign In</a>
+                <a href="signup.html" class="btn btn-primary-nav" id="navGetStarted">Get Started</a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="page-header-content">
+                <h1>My Dashboard</h1>
+                <p>Track your applications and saved internships</p>
+                <div class="breadcrumb">
+                    <a href="index.html">Home</a>
+                    <span>/</span>
+                    <span>Dashboard</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Content -->
+    <section class="dashboard-section">
+        <div class="container">
+            <!-- Stats -->
+            <div class="dashboard-stats">
+                <div class="dash-stat-card">
+                    <div class="dash-stat-number" id="dashTotal">0</div>
+                    <div class="dash-stat-label">Total Applications</div>
+                </div>
+                <div class="dash-stat-card">
+                    <div class="dash-stat-number" id="dashReview">0</div>
+                    <div class="dash-stat-label">Under Review</div>
+                </div>
+                <div class="dash-stat-card">
+                    <div class="dash-stat-number" id="dashShortlisted">0</div>
+                    <div class="dash-stat-label">Shortlisted</div>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="dashboard-tabs">
+                <button class="dash-tab active" data-tab="applications">My Applications</button>
+                <button class="dash-tab" data-tab="saved">Saved Internships</button>
+            </div>
+
+            <!-- Applications Tab -->
+            <div id="dashboardApps">
+                <div class="dashboard-grid" id="dashboardGrid">
+                    <!-- Rendered by JS -->
+                </div>
+            </div>
+
+            <!-- Saved Tab -->
+            <div id="dashboardSaved" style="display:none;">
+                <div class="dashboard-grid" id="dashboardSavedGrid">
+                    <!-- Rendered by JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <span class="logo-icon">IP</span>
+                        <span class="logo-text">InternPath</span>
+                    </div>
+                    <p>India's most trusted internship platform. Connecting ambitious students with leading companies
+                        since 2022.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>For Students</h4>
+                    <ul>
+                        <li><a href="jobs.html">Browse Internships</a></li>
+                        <li><a href="filters.html">Advanced Search</a></li>
+                        <li><a href="#">Resume Builder</a></li>
+                        <li><a href="#">Career Guides</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>For Companies</h4>
+                    <ul>
+                        <li><a href="company.html">Post Internship</a></li>
+                        <li><a href="#">Pricing Plans</a></li>
+                        <li><a href="#">Featured Listings</a></li>
+                        <li><a href="#">Campus Connect</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>2026 InternPath. All rights reserved. Made for students, by students.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Notification Panel -->
+    <div class="notif-panel-backdrop" id="notifBackdrop"></div>
+    <div class="notification-panel" id="notifPanel">
+        <div class="notif-panel-header">
+            <h3>Notifications</h3>
+            <button class="notif-panel-close" id="notifPanelClose">&times;</button>
+        </div>
+        <div class="notif-list" id="notifList"></div>
+    </div>
+
+    <!-- Dark Mode Toggle -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <span class="icon-moon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg></span>
+        <span class="icon-sun"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg></span>
+    </button>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
+    <!-- Page Transition Overlay -->
+    <div class="page-transition-overlay" id="pageTransitionOverlay"></div>
+
+    <script src="Java-script/script.js"></script>
+</body>
+
+</html>

@@ -327,9 +327,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
             navActions.innerHTML =
                 '<div class="nav-user">' +
-                    '<div class="nav-user-avatar" title="' + (user.firstName || user.email) + '">' + initials.toUpperCase() + '</div>' +
-                    '<span class="nav-user-name">' + (user.firstName || 'User') + '</span>' +
-                    '<button class="btn-logout" id="logoutBtn">Logout</button>' +
+                '<div class="nav-user-avatar" title="' + (user.firstName || user.email) + '">' + initials.toUpperCase() + '</div>' +
+                '<span class="nav-user-name">' + (user.firstName || 'User') + '</span>' +
+                '<button class="btn-logout" id="logoutBtn">Logout</button>' +
                 '</div>';
 
             var logoutBtn = document.getElementById('logoutBtn');
@@ -535,7 +535,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             if (!firstName || !lastName) {
                 valid = false;
-                alert('Please enter your full name.');
+                showToast('Please enter your full name.', 'error');
                 return;
             }
 
@@ -551,7 +551,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             if (password.length < 8) {
                 valid = false;
-                alert('Password must be at least 8 characters.');
+                showToast('Password must be at least 8 characters.', 'error');
                 return;
             }
 
@@ -562,7 +562,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             if (agreeTerms && !agreeTerms.checked) {
                 valid = false;
-                alert('Please agree to the Terms of Service.');
+                showToast('Please agree to the Terms of Service.', 'warning');
                 return;
             }
 
@@ -758,13 +758,13 @@ document.addEventListener('DOMContentLoaded', function () {
             if (this.files && this.files[0]) {
                 var file = this.files[0];
                 if (file.type !== 'application/pdf') {
-                    alert('Please upload a PDF file only.');
+                    showToast('Please upload a PDF file only.', 'error');
                     this.value = '';
                     if (fileNameDisplay) fileNameDisplay.textContent = '';
                     return;
                 }
                 if (file.size > 5 * 1024 * 1024) {
-                    alert('File size must be less than 5MB.');
+                    showToast('File size must be less than 5MB.', 'error');
                     this.value = '';
                     if (fileNameDisplay) fileNameDisplay.textContent = '';
                     return;
@@ -808,12 +808,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Validate
             if (!fullName || !email || !phone || !college || !degree || !coverLetter) {
-                alert('Please fill in all required fields.');
+                showToast('Please fill in all required fields.', 'error');
                 return;
             }
 
             if (!resume || !resume.files || !resume.files[0]) {
-                alert('Please upload your resume.');
+                showToast('Please upload your resume.', 'warning');
                 return;
             }
 
@@ -1257,35 +1257,35 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 return '<div class="job-list-card" data-id="' + job.id + '">' +
                     '<div class="job-list-card-header">' +
-                        '<div class="job-list-left">' +
-                            '<div class="company-logo"><img src="' + job.companyLogo + '" alt="' + job.company + '"></div>' +
-                            '<div class="job-list-info">' +
-                                '<h3>' + job.title + '</h3>' +
-                                '<span class="company-name">' + job.company + '</span>' +
-                            '</div>' +
-                        '</div>' +
-                        '<div class="job-list-right">' +
-                            '<div class="job-list-stipend">' + job.stipendDisplay + '</div>' +
-                            '<div class="job-list-posted">' + job.posted + '</div>' +
-                        '</div>' +
+                    '<div class="job-list-left">' +
+                    '<div class="company-logo"><img src="' + job.companyLogo + '" alt="' + job.company + '"></div>' +
+                    '<div class="job-list-info">' +
+                    '<h3>' + job.title + '</h3>' +
+                    '<span class="company-name">' + job.company + '</span>' +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="job-list-right">' +
+                    '<div class="job-list-stipend">' + job.stipendDisplay + '</div>' +
+                    '<div class="job-list-posted">' + job.posted + '</div>' +
+                    '</div>' +
                     '</div>' +
                     '<div class="job-list-meta">' +
-                        '<div class="job-list-meta-item">' +
-                            '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>' +
-                            job.location +
-                        '</div>' +
-                        '<div class="job-list-meta-item">' +
-                            '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>' +
-                            job.duration + (job.duration === 1 ? ' Month' : ' Months') +
-                        '</div>' +
-                        '<div class="job-list-meta-item">' + badges.join('') + '</div>' +
+                    '<div class="job-list-meta-item">' +
+                    '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>' +
+                    job.location +
+                    '</div>' +
+                    '<div class="job-list-meta-item">' +
+                    '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>' +
+                    job.duration + (job.duration === 1 ? ' Month' : ' Months') +
+                    '</div>' +
+                    '<div class="job-list-meta-item">' + badges.join('') + '</div>' +
                     '</div>' +
                     '<p class="job-list-desc">' + job.description + '</p>' +
                     '<div class="job-list-footer">' +
-                        '<div class="job-list-tags">' + perkTags.join('') + '</div>' +
-                        '<a href="#" class="btn btn-apply apply-btn" data-job="' + job.title + ' - ' + job.company + '" onclick="event.preventDefault();">Apply Now</a>' +
+                    '<div class="job-list-tags">' + perkTags.join('') + '</div>' +
+                    '<a href="#" class="btn btn-apply apply-btn" data-job="' + job.title + ' - ' + job.company + '" onclick="event.preventDefault();">Apply Now</a>' +
                     '</div>' +
-                '</div>';
+                    '</div>';
             }).join('');
         }
 
@@ -1298,9 +1298,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 var q = searchQuery.toLowerCase();
                 filtered = filtered.filter(function (job) {
                     return job.title.toLowerCase().includes(q) ||
-                           job.company.toLowerCase().includes(q) ||
-                           job.description.toLowerCase().includes(q) ||
-                           job.category.toLowerCase().includes(q);
+                        job.company.toLowerCase().includes(q) ||
+                        job.description.toLowerCase().includes(q) ||
+                        job.category.toLowerCase().includes(q);
                 });
             }
 
@@ -1416,7 +1416,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 return '<span class="active-filter-tag">' +
                     tag.label +
                     '<button data-type="' + tag.filterType + '" data-value="' + tag.value + '">&times;</button>' +
-                '</span>';
+                    '</span>';
             }).join('');
 
             // Bind remove events
@@ -1653,7 +1653,563 @@ document.addEventListener('DOMContentLoaded', function () {
                 contactFormSuccess.style.display = 'block';
                 contactFormSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
+            showToast('Message sent successfully! We\'ll get back to you soon.', 'success');
         });
     }
 
+
+    /* ======================================================================
+       24. DARK MODE TOGGLE
+       ====================================================================== */
+    function initTheme() {
+        var saved = localStorage.getItem('internpath_theme');
+        if (saved === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+    }
+    initTheme();
+
+    var themeToggle = document.getElementById('themeToggle');
+    if (themeToggle) {
+        themeToggle.addEventListener('click', function () {
+            var current = document.documentElement.getAttribute('data-theme');
+            if (current === 'dark') {
+                document.documentElement.removeAttribute('data-theme');
+                localStorage.setItem('internpath_theme', 'light');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('internpath_theme', 'dark');
+            }
+        });
+    }
+
+
+    /* ======================================================================
+       25. TOAST NOTIFICATION SYSTEM
+       ====================================================================== */
+    // Create toast container
+    var toastContainer = document.querySelector('.toast-container');
+    if (!toastContainer) {
+        toastContainer = document.createElement('div');
+        toastContainer.className = 'toast-container';
+        document.body.appendChild(toastContainer);
+    }
+
+    function showToast(message, type) {
+        type = type || 'info';
+        var icons = {
+            success: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>',
+            error: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>',
+            info: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>',
+            warning: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>'
+        };
+
+        var toast = document.createElement('div');
+        toast.className = 'toast toast-' + type;
+        toast.innerHTML =
+            '<div class="toast-icon">' + (icons[type] || icons.info) + '</div>' +
+            '<span class="toast-message">' + message + '</span>' +
+            '<button class="toast-close">&times;</button>' +
+            '<div class="toast-progress"></div>';
+
+        toastContainer.appendChild(toast);
+
+        // Close on click
+        toast.querySelector('.toast-close').addEventListener('click', function () {
+            toast.classList.add('toast-exit');
+            setTimeout(function () { toast.remove(); }, 300);
+        });
+
+        // Auto dismiss
+        setTimeout(function () {
+            if (toast.parentNode) {
+                toast.classList.add('toast-exit');
+                setTimeout(function () { toast.remove(); }, 300);
+            }
+        }, 4000);
+    }
+
+    // Make showToast available globally
+    window.showToast = showToast;
+
+
+    /* ======================================================================
+       26. BOOKMARKS SYSTEM
+       ====================================================================== */
+    function getBookmarks() {
+        var data = localStorage.getItem('internpath_bookmarks');
+        return data ? JSON.parse(data) : [];
+    }
+
+    function isBookmarked(jobId) {
+        return getBookmarks().some(function (b) { return b.id === jobId; });
+    }
+
+    function toggleBookmark(jobId, jobTitle, company) {
+        var bookmarks = getBookmarks();
+        var index = -1;
+        for (var i = 0; i < bookmarks.length; i++) {
+            if (bookmarks[i].id === jobId) {
+                index = i;
+                break;
+            }
+        }
+
+        if (index >= 0) {
+            bookmarks.splice(index, 1);
+            showToast('Removed from saved internships', 'info');
+        } else {
+            bookmarks.push({ id: jobId, title: jobTitle, company: company, savedAt: new Date().toISOString() });
+            showToast('Saved to your bookmarks! ❤️', 'success');
+        }
+
+        localStorage.setItem('internpath_bookmarks', JSON.stringify(bookmarks));
+        updateAllBookmarkButtons();
+        updateNotificationBadge();
+    }
+
+    function createBookmarkBtn(jobId, jobTitle, company) {
+        var btn = document.createElement('button');
+        btn.className = 'bookmark-btn' + (isBookmarked(jobId) ? ' active' : '');
+        btn.setAttribute('data-job-id', jobId);
+        btn.setAttribute('title', 'Save this internship');
+        btn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>';
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleBookmark(jobId, jobTitle, company);
+        });
+        return btn;
+    }
+
+    function updateAllBookmarkButtons() {
+        document.querySelectorAll('.bookmark-btn').forEach(function (btn) {
+            var id = parseInt(btn.getAttribute('data-job-id'));
+            if (isBookmarked(id)) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+    }
+
+    // Add bookmark buttons to homepage featured cards
+    var featuredCards = document.querySelectorAll('.featured-grid .job-card');
+    var featuredJobIds = [1, 2, 3, 4, 5, 6]; // matches the 6 featured cards
+    var featuredNames = [
+        { title: 'Software Engineering Intern', company: 'Google India' },
+        { title: 'Product Design Intern', company: 'Microsoft' },
+        { title: 'Marketing Analytics Intern', company: 'Swiggy' },
+        { title: 'Financial Analyst Intern', company: 'Deloitte India' },
+        { title: 'Full Stack Developer Intern', company: 'Zomato' },
+        { title: 'UI/UX Design Intern', company: 'Razorpay' }
+    ];
+
+    featuredCards.forEach(function (card, i) {
+        if (i < featuredJobIds.length) {
+            card.appendChild(createBookmarkBtn(featuredJobIds[i], featuredNames[i].title, featuredNames[i].company));
+        }
+    });
+
+
+    /* ======================================================================
+       27. HERO TYPING EFFECT
+       ====================================================================== */
+    var typingTarget = document.getElementById('heroTypingTarget');
+    if (typingTarget) {
+        var typingWords = ['Web Development', 'Data Science', 'UI/UX Design', 'Marketing', 'Finance', 'Cloud Computing'];
+        var typingIndex = 0;
+        var charIndex = 0;
+        var isDeleting = false;
+        var typingSpeed = 80;
+
+        function typeEffect() {
+            var currentWord = typingWords[typingIndex];
+
+            if (isDeleting) {
+                typingTarget.textContent = currentWord.substring(0, charIndex - 1);
+                charIndex--;
+                typingSpeed = 40;
+            } else {
+                typingTarget.textContent = currentWord.substring(0, charIndex + 1);
+                charIndex++;
+                typingSpeed = 80;
+            }
+
+            if (!isDeleting && charIndex === currentWord.length) {
+                typingSpeed = 2000; // pause at end
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                typingIndex = (typingIndex + 1) % typingWords.length;
+                typingSpeed = 300;
+            }
+
+            setTimeout(typeEffect, typingSpeed);
+        }
+
+        typeEffect();
+    }
+
+
+    /* ======================================================================
+       28. PARTICLE BACKGROUND
+       ====================================================================== */
+    var particlesContainer = document.getElementById('particlesContainer');
+    if (particlesContainer) {
+        for (var p = 0; p < 50; p++) {
+            var particle = document.createElement('div');
+            particle.className = 'particle';
+            var size = Math.random() * 4 + 2;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = (Math.random() * 100 + 100) + '%';
+            particle.style.animationDuration = (Math.random() * 15 + 10) + 's';
+            particle.style.animationDelay = (Math.random() * 10) + 's';
+            particlesContainer.appendChild(particle);
+        }
+    }
+
+
+    /* ======================================================================
+       29. BACK TO TOP BUTTON
+       ====================================================================== */
+    var backToTop = document.getElementById('backToTop');
+    if (backToTop) {
+        window.addEventListener('scroll', function () {
+            if (window.scrollY > 500) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        backToTop.addEventListener('click', function () {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
+
+    /* ======================================================================
+       30. PAGE TRANSITIONS
+       ====================================================================== */
+    var transitionOverlay = document.getElementById('pageTransitionOverlay');
+    if (transitionOverlay) {
+        // Play enter animation on load
+        transitionOverlay.classList.add('page-enter');
+        setTimeout(function () {
+            transitionOverlay.classList.remove('page-enter');
+        }, 500);
+
+        // Intercept internal links
+        document.querySelectorAll('a[href]').forEach(function (link) {
+            var href = link.getAttribute('href');
+            // Only intercept local links
+            if (href && !href.startsWith('#') && !href.startsWith('http') && !href.startsWith('mailto') && !href.startsWith('tel') && href.indexOf('javascript') !== 0) {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    var target = this.getAttribute('href');
+                    transitionOverlay.classList.add('page-exit');
+                    setTimeout(function () {
+                        window.location.href = target;
+                    }, 400);
+                });
+            }
+        });
+    }
+
+
+    /* ======================================================================
+       31. LIVE SEARCH SUGGESTIONS
+       ====================================================================== */
+    var heroSearchInput = document.getElementById('heroSearchRole');
+    var searchSuggestionsEl = document.getElementById('heroSearchSuggestions');
+    var searchData = [
+        { title: 'Software Engineering Intern', company: 'Google India' },
+        { title: 'Product Design Intern', company: 'Microsoft' },
+        { title: 'Marketing Analytics Intern', company: 'Swiggy' },
+        { title: 'Financial Analyst Intern', company: 'Deloitte India' },
+        { title: 'Full Stack Developer Intern', company: 'Zomato' },
+        { title: 'UI/UX Design Intern', company: 'Razorpay' },
+        { title: 'Data Science Intern', company: 'Flipkart' },
+        { title: 'Content Writing Intern', company: 'Unacademy' },
+        { title: 'Backend Engineer Intern', company: 'PhonePe' },
+        { title: 'Digital Marketing Intern', company: 'Nykaa' },
+        { title: 'Machine Learning Intern', company: 'Amazon India' },
+        { title: 'React Developer Intern', company: 'Meesho' },
+        { title: 'Investment Banking Intern', company: 'Goldman Sachs' },
+        { title: 'DevOps Engineer Intern', company: 'Infosys' },
+        { title: 'Business Analytics Intern', company: 'Paytm' }
+    ];
+
+    if (heroSearchInput && searchSuggestionsEl) {
+        heroSearchInput.addEventListener('input', function () {
+            var query = this.value.trim().toLowerCase();
+            if (query.length < 2) {
+                searchSuggestionsEl.classList.remove('active');
+                return;
+            }
+
+            var filtered = searchData.filter(function (item) {
+                return item.title.toLowerCase().indexOf(query) !== -1 ||
+                    item.company.toLowerCase().indexOf(query) !== -1;
+            }).slice(0, 6);
+
+            if (filtered.length === 0) {
+                searchSuggestionsEl.classList.remove('active');
+                return;
+            }
+
+            searchSuggestionsEl.innerHTML = '';
+            filtered.forEach(function (item) {
+                var div = document.createElement('div');
+                div.className = 'suggestion-item';
+                div.innerHTML =
+                    '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg>' +
+                    '<div><span class="suggestion-title">' + item.title + '</span><br><span class="suggestion-company">' + item.company + '</span></div>';
+                div.addEventListener('click', function () {
+                    heroSearchInput.value = item.title;
+                    searchSuggestionsEl.classList.remove('active');
+                    window.location.href = 'jobs.html';
+                });
+                searchSuggestionsEl.appendChild(div);
+            });
+            searchSuggestionsEl.classList.add('active');
+        });
+
+        // Close on click outside
+        document.addEventListener('click', function (e) {
+            if (!e.target.closest('.hero-search')) {
+                searchSuggestionsEl.classList.remove('active');
+            }
+        });
+    }
+
+
+    /* ======================================================================
+       32. NOTIFICATION CENTER
+       ====================================================================== */
+    var notifBell = document.getElementById('notifBell');
+    var notifPanel = document.getElementById('notifPanel');
+    var notifBackdrop = document.getElementById('notifBackdrop');
+    var notifPanelClose = document.getElementById('notifPanelClose');
+
+    function generateNotifications() {
+        var user = getUser();
+        var apps = getApplications();
+        var notifs = [];
+
+        if (apps.length > 0) {
+            apps.forEach(function (app) {
+                notifs.push({
+                    text: 'Your application for <strong>' + app.jobTitle + '</strong> was received successfully.',
+                    time: app.appliedAt || 'Recently',
+                    unread: true
+                });
+            });
+        }
+
+        // Default notifications
+        notifs.push({
+            text: '<strong>5 new internships</strong> matching your profile were posted today.',
+            time: '2 hours ago',
+            unread: true
+        });
+        notifs.push({
+            text: '<strong>Google</strong> is now hiring Software Engineering Interns. Don\'t miss out!',
+            time: '5 hours ago',
+            unread: false
+        });
+        notifs.push({
+            text: 'Complete your profile to get <strong>personalized recommendations</strong>.',
+            time: '1 day ago',
+            unread: false
+        });
+
+        return notifs;
+    }
+
+    function renderNotifications() {
+        var list = document.getElementById('notifList');
+        if (!list) return;
+
+        var notifs = generateNotifications();
+        list.innerHTML = '';
+
+        notifs.forEach(function (n) {
+            var item = document.createElement('div');
+            item.className = 'notif-item' + (n.unread ? ' unread' : '');
+            item.innerHTML =
+                '<div class="notif-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg></div>' +
+                '<div class="notif-item-content">' +
+                '<div class="notif-item-text">' + n.text + '</div>' +
+                '<div class="notif-item-time">' + n.time + '</div>' +
+                '</div>';
+            item.addEventListener('click', function () {
+                this.classList.remove('unread');
+                updateNotificationBadge();
+            });
+            list.appendChild(item);
+        });
+
+        updateNotificationBadge();
+    }
+
+    function updateNotificationBadge() {
+        var badge = document.querySelector('.notif-badge');
+        if (!badge) return;
+        var unread = document.querySelectorAll('.notif-item.unread').length;
+        if (unread > 0) {
+            badge.textContent = unread > 9 ? '9+' : unread;
+            badge.classList.add('show');
+        } else {
+            badge.classList.remove('show');
+        }
+    }
+
+    if (notifBell && notifPanel) {
+        renderNotifications();
+
+        notifBell.addEventListener('click', function () {
+            notifPanel.classList.toggle('open');
+            if (notifBackdrop) notifBackdrop.classList.toggle('show');
+        });
+
+        if (notifPanelClose) {
+            notifPanelClose.addEventListener('click', function () {
+                notifPanel.classList.remove('open');
+                if (notifBackdrop) notifBackdrop.classList.remove('show');
+            });
+        }
+
+        if (notifBackdrop) {
+            notifBackdrop.addEventListener('click', function () {
+                notifPanel.classList.remove('open');
+                notifBackdrop.classList.remove('show');
+            });
+        }
+    }
+
+    // Show notification bell only when logged in
+    var allNotifBells = document.querySelectorAll('.notification-bell');
+    var currentUserForNotif = getUser();
+    allNotifBells.forEach(function (bell) {
+        bell.style.display = currentUserForNotif ? 'block' : 'none';
+    });
+
+
+    /* ======================================================================
+       33. DASHBOARD RENDERER
+       ====================================================================== */
+    var dashboardGrid = document.getElementById('dashboardGrid');
+    var dashboardSavedGrid = document.getElementById('dashboardSavedGrid');
+
+    if (dashboardGrid) {
+        var apps = getApplications();
+        var dashTotalEl = document.getElementById('dashTotal');
+        var dashReviewEl = document.getElementById('dashReview');
+        var dashShortlistedEl = document.getElementById('dashShortlisted');
+
+        var reviewCount = 0;
+        var shortlistedCount = 0;
+
+        apps.forEach(function (app) {
+            if (app.status === 'Under Review') reviewCount++;
+            if (app.status === 'Shortlisted') shortlistedCount++;
+        });
+
+        if (dashTotalEl) dashTotalEl.textContent = apps.length;
+        if (dashReviewEl) dashReviewEl.textContent = reviewCount;
+        if (dashShortlistedEl) dashShortlistedEl.textContent = shortlistedCount;
+
+        if (apps.length === 0) {
+            dashboardGrid.innerHTML =
+                '<div class="dashboard-empty" style="grid-column:span 2;">' +
+                '<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>' +
+                '<h3>No applications yet</h3>' +
+                '<p>Start applying to internships and track your progress here.</p>' +
+                '<a href="jobs.html" class="btn btn-primary-nav">Browse Internships</a>' +
+                '</div>';
+        } else {
+            dashboardGrid.innerHTML = '';
+            apps.forEach(function (app) {
+                var statusClass = 'status-review';
+                if (app.status === 'Shortlisted') statusClass = 'status-shortlisted';
+                if (app.status === 'Rejected') statusClass = 'status-rejected';
+
+                var card = document.createElement('div');
+                card.className = 'app-card';
+                card.innerHTML =
+                    '<div class="app-card-header">' +
+                    '<span class="app-card-title">' + (app.jobTitle || 'Internship') + '</span>' +
+                    '<span class="status-badge ' + statusClass + '">' + (app.status || 'Under Review') + '</span>' +
+                    '</div>' +
+                    '<div class="app-card-company">' + (app.college || '') + '</div>' +
+                    '<div class="app-card-meta">' +
+                    '<span>📄 ' + (app.resumeName || 'Resume') + '</span>' +
+                    '<span>📅 ' + (app.appliedAt || 'Recently') + '</span>' +
+                    '</div>';
+                dashboardGrid.appendChild(card);
+            });
+        }
+    }
+
+    if (dashboardSavedGrid) {
+        var bookmarks = getBookmarks();
+
+        if (bookmarks.length === 0) {
+            dashboardSavedGrid.innerHTML =
+                '<div class="dashboard-empty" style="grid-column:span 2;">' +
+                '<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>' +
+                '<h3>No saved internships</h3>' +
+                '<p>Click the heart icon on any internship to save it here.</p>' +
+                '<a href="jobs.html" class="btn btn-primary-nav">Browse Internships</a>' +
+                '</div>';
+        } else {
+            dashboardSavedGrid.innerHTML = '';
+            bookmarks.forEach(function (b) {
+                var card = document.createElement('div');
+                card.className = 'saved-card';
+                card.innerHTML =
+                    '<div class="saved-card-info">' +
+                    '<h4>' + b.title + '</h4>' +
+                    '<p>' + b.company + '</p>' +
+                    '</div>' +
+                    '<button class="btn-remove-saved" data-bookmark-id="' + b.id + '">Remove</button>';
+                dashboardSavedGrid.appendChild(card);
+            });
+
+            // Remove buttons
+            dashboardSavedGrid.querySelectorAll('.btn-remove-saved').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    var id = parseInt(this.getAttribute('data-bookmark-id'));
+                    var bmarks = getBookmarks();
+                    bmarks = bmarks.filter(function (x) { return x.id !== id; });
+                    localStorage.setItem('internpath_bookmarks', JSON.stringify(bmarks));
+                    showToast('Removed from saved', 'info');
+                    // Re-render
+                    location.reload();
+                });
+            });
+        }
+    }
+
+    // Dashboard tab switching
+    var dashTabs = document.querySelectorAll('.dash-tab');
+    dashTabs.forEach(function (tab) {
+        tab.addEventListener('click', function () {
+            dashTabs.forEach(function (t) { t.classList.remove('active'); });
+            this.classList.add('active');
+            var target = this.getAttribute('data-tab');
+            var appsPanel = document.getElementById('dashboardApps');
+            var savedPanel = document.getElementById('dashboardSaved');
+            if (appsPanel && savedPanel) {
+                appsPanel.style.display = target === 'applications' ? 'block' : 'none';
+                savedPanel.style.display = target === 'saved' ? 'block' : 'none';
+            }
+        });
+    });
+
 }); // end DOMContentLoaded
+
